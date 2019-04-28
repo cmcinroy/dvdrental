@@ -1,0 +1,159 @@
+
+type Query {
+    #Tags - 4th level Hierarchy Queries
+    Actor(actor_id: ID!): Actor
+    allActors(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: GenericFilter): [Actor]
+    _allActorsMeta(page: Int, perPage: Int, sortField: String, sortOrder: String, filter: GenericFilter): ListMetadata
+}
+
+type Mutation {
+    createActor(first_name: String, last_name: String): Actor
+    updateActor(id: ID!, first_name: String, last_name: String): Actor
+    deleteActor(id: ID!): Actor
+}
+
+input GenericFilter {
+    q: String
+    ids: [ID]
+    name: String
+}
+
+type ListMetadata {
+    count: Int!
+}
+
+type Actor {
+    id: Int!
+    first_name: String!
+    last_name: String!
+    last_update: String!
+}
+
+type Address {
+    address_id: Int!
+    address: String!
+    address2: String
+    district: String!
+    City: City!
+    postal_code: String!
+    phone: String!
+    last_update: String!
+}
+
+type Category {
+    category_id: Int!
+    name: String!
+    last_update: String!
+}
+
+type City {
+    city_id: Int!
+    city: String!
+    Country: Country!
+    last_update: String!
+}
+
+type Country {
+    country_id:Int!
+    country: String!
+    last_update: String!
+}
+
+type Customer {
+    customer_id: Int!
+    store_id: Int!
+    first_name: String!
+    last_name: String!
+    email: String!
+    Address: Address!
+    activebool: Boolean!
+    create_date: String!
+    last_update: String!
+    active: Int!
+}
+
+type Film {
+    film_id: Int!
+    title: String!
+    description: String
+    release_year: Int
+    language_id: Int!
+    rental_duration: Int!
+    rental_rate: Int!
+    length: Int
+    replacement_cost: Int!
+    rating: String
+    last_update: String!
+    special_features: [String]
+    fulltext: String
+    Actors: [Actor]
+    Categories: [Category]
+}
+
+type FilmActor {
+    actor_id: Int!
+    film_id: Int!
+    last_update: String!
+}
+
+type FilmCategory {
+    film_id: Int!
+    category_id: Int!
+    last_update: String!
+}
+
+type Inventory {
+    inventory_id: Int!
+    Film: Film!
+    Store: Store!
+    last_update: String!
+}
+
+type Language {
+    language_id: Int!
+    name: String!
+    last_update: String!
+}
+
+type Payment {
+    payment_id: Int!
+    Customer: Customer!
+    Staff: Staff!
+    Rental: Rental!
+    amount: Int!
+    payment_date: String!
+}
+
+type Rental {
+    rental_id: Int!
+    rental_date: String!
+    Inventory: Inventory!
+    Customer: Customer!
+    return_date: String!
+    Staff: Staff!
+    last_update: String!
+}
+
+type Staff {
+
+    staff_id: Int!
+    first_name: String!
+    last_name: String!
+    address_id: Int!
+    email: String
+    Store: Int!
+    active: Boolean!
+    username: String!
+    password: String
+    last_update: String!
+    picture: String
+}
+
+type Store {
+    store_id: Int!
+    manager_staff_id: Int!
+    address_id: Int!
+    last_update: String!
+}
+
+
